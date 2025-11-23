@@ -1,10 +1,10 @@
 # Olympic Medals and Economic Development Analysis
 
-An exploration of the relationship between national economic strength (GDP) and Olympic medal performance across countries over time.
+An exploration of the relationship between national economic strength (GDP) and Summer Olympic medal performance across countries over time.
 
 ## Overview
 
-This project investigates how a country's economic resources correlate with their success at the Olympics. By combining historical Olympic medal data with historical GDP statistics, we aim to understand whether wealthier nations win more medals, and how this relationship has evolved over different Olympic years. The analysis includes visualizations of medal distributions, GDP comparisons, and statistical modeling to determine the strength of the relationship between a country's wealth and its Olympics Performance
+This project investigates how a country's economic resources correlate with their success at the Summer Olympics. By combining historical Olympic medal data with historical GDP statistics, we aim to understand whether wealthier nations win more medals, and how this relationship has evolved over different Olympic years. The analysis includes visualizations of medal distributions, GDP comparisons, and statistical modeling to determine the strength of the relationship between a country's wealth and its Summer Olympics Performance
 
 ### Interesting Insight (Optional)
 
@@ -18,7 +18,7 @@ Be sure to list where you got any data used within the project. Be sure to ackno
 
 The analysis will proceed through several phases:
 
-1. **Data Wrangling**: Import and tidy both Olympic Medal data over time and GDP by country data over time
+1. **Data Wrangling**: Import and tidy both Summer Olympic Medal data over time and GDP by country data over time
 2. **Data Preparation**: Merge Olympic medal counts with GDP data by country and year
 3. **Exploratory Analysis**: Examine distributions, trends over time, and outliers
 4. **Statistical Modeling**: Quantify the relationship between GDP and medal counts using regression analysis
