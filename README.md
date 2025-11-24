@@ -44,10 +44,10 @@ Use this section to explain the structure of your repo. This should help visitor
 ## Authors
 Arul Santoshi, Penn State Student  
    - Email: ajs10266@psu.edu  
-   - Github: Arul-Santoshi  
+   - Github: Arul-Santoshi
 Kyle Spaulding, Penn State Student  
    - Email: kbs6178@psu.edu  
-   - Github: spauldingk  
+   - Github: spauldingk
 Krish Chavan, Penn State Student  
    - Email: ksc5629@psu.edu  
    - Github: KrishPSU  
