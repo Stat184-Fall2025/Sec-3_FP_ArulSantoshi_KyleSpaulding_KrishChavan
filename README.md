@@ -12,7 +12,18 @@ This is optional but highly recommended. You'll include one interesting insight 
 
 ## Data Sources and Acknowledgements
 
-Be sure to list where you got any data used within the project. Be sure to acknowledge any one whose work or elements you're drawing upon.
+**Olympic Medal Data**
+- Source: Olympedia.org (https://www.olympedia.org/statistics/medal/country)
+- Collection Date: November 23, 2024
+- Coverage: Summer Olympics 1960-2020
+
+**GDP Data**
+- Source: World Bank Open Data
+- Indicator: NY.GDP.MKTP.CD (GDP, current US$)
+- URL: https://data.worldbank.org/indicator/NY.GDP.MKTP.CD
+- Download Date: November 23, 2024
+- File: `API_NY.GDP.MKTP.CD_DS2_en_csv_v2_269001.csv`
+- Coverage: 1960-2023 (filtered to Olympic years)
 
 ## Current Plan
 
