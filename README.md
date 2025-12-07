@@ -6,9 +6,32 @@ An exploration of the relationship between national economic strength (GDP) and 
 
 This project investigates how a country's economic resources correlate with their success at the Summer Olympics. By combining historical Olympic medal data with historical GDP statistics, we aim to understand whether wealthier nations win more medals, and how this relationship has evolved over different Olympic years. The analysis includes visualizations of medal distributions, GDP comparisons, and statistical modeling to determine the strength of the relationship between a country's wealth and its Summer Olympics Performance
 
+**Key Research Questions:**
+- How strongly does GDP predict Olympic medal counts?
+- Has this relationship strengthened or weakened over time?
+- Which countries achieve the most medals relative to their economic resources?
+- What factors beyond GDP drive Olympic success?
+
+
 ### Interesting Insight (Optional)
 
-This is optional but highly recommended. You'll include one interesting insight from your project as part of the README. This insight is most effective when you include a visual. Keep in mind that this visual must be included as an image file (e.g., JPG, PNG, etc.). You can export plots created with `{ggplot2}` by using the function `ggsave`.
+![GDP vs Olympic Medals](figures/final/01_gdp_medals_relationship.png)
+
+**Economic power predicts Olympic success—but it's not the whole story.** While GDP explains 47% of variance in medal counts, our efficiency analysis reveals dramatic differences: **Hungary achieves 1.33 medals per billion GDP, making them 162 times more efficient than India** despite India's economy being 12 times larger. This suggests that strategic investment in athletics matters more than raw economic size.
+
+Countries like Kenya, Jamaica, and Cuba prove that smart sports programs can compete with economic superpowers. Meanwhile, wealthy nations like India and the USA demonstrate that money alone doesn't guarantee _proportional_ Olympic success.
+
+## Key Findings
+
+1. **GDP is a strong but imperfect predictor** - Economic resources explain 47.2% of variance in medal counts (p < 0.001)
+
+2. **Efficiency varies dramatically** - Hungary (1.33 medals/$B GDP) vs India (0.008 medals/$B GDP) shows a 162x difference in efficiency
+
+3. **Smaller economies are more efficient** - Negative correlation (r = -0.12) between GDP size and medals per dollar
+
+4. **The relationship has strengthened over time** - Correlation increased from ~0.60 in early Olympics to 0.87 in 2020 (except 1980 Moscow boycott anomaly)
+
+5. **Only Hungary appears in both top 10 lists** - Top total medals AND top efficiency, proving smart investment competes with economic power
 
 ## Data Sources and Acknowledgements
 
@@ -38,7 +61,42 @@ The analysis will proceed through several phases:
 
 ## Repo Structure
 
-Use this section to explain the structure of your repo. This should help visitors quickly figure out where they should look to find certain elements. Further, you can use this space to highlight and briefly explain important/key files in the repo.
+```
+.
+├── data/
+│   ├── raw/                              # Original data files
+│   │   ├── olympics_medals_summer.csv    # Raw Olympic medal data
+│   │   ├── olympics_medals_summer_clean.csv
+│   │   ├── API_NY.GDP.MKTP.CD_DS2_en_csv_v2_269001.csv  # World Bank GDP data
+│   │   └── gdp_clean.csv
+│   └── processed/                        # Analysis-ready datasets
+│       ├── olympics_medals_standardized.csv
+│       ├── olympics_gdp_merged.csv       # !!Main analysis file!!
+│       ├── olympics_gdp_with_residuals.csv
+│       └── olympics_efficiency.csv
+├── scripts/
+│   ├── 01_scrape_summer_olympics_data.R
+│   ├── 02_clean_olympics_medals_summer_data.R
+│   ├── 03_clean_gdp_data.R
+│   ├── 04_merge_gdp_olympics.R
+│   ├── 05_standardize_olympics_data.R
+│   ├── 06_exploratory_analysis.R         # EDA and initial visualizations
+│   ├── 07_regression_analysis.R          # Linear modeling
+│   ├── 08_efficiency_analysis.R          # Medals per GDP calculations
+│   └── 09_final_visualizations.R         # Publication-quality plots
+├── figures/
+│   └── final/                            # Polished visualizations for report
+│       ├── 01_gdp_medals_relationship.png
+│       ├── 02_efficiency_champions.png
+│       ├── 03_efficiency_paradox.png
+│       └── ...
+├── analysis/                             # Analysis findings documentation
+│   ├── eda_findings.md
+│   ├── regression_findings.md
+│   └── efficiency_findings.md
+├── analysis_report.qmd                   # Final Quarto analysis report (TODO)
+└── README.md
+```
 
 
 ## Authors
