@@ -5,7 +5,7 @@
 library(tidyverse)
 
 # Load the merged data
-olympics_gdp <- read_csv("Data Preprocessing/olympics_gdp_merged.csv")
+olympics_gdp <- read_csv("data/processed/olympics_gdp_merged.csv")
 
 
 # ============================================================================
