@@ -29,7 +29,7 @@ source("01_scrape_summer_olympics_data.R")
 ## Data Cleaning
 
 # Script 02: Clean Olympic medals data
-source("scripts/02_clean_olympics_medals_summer_data.R")
+source("02_clean_olympics_medals_summer_data.R")
 
 # Script 03: Clean GDP data
-source("scripts/03_clean_gdp_data.R")
+source("03_clean_gdp_data.R")
