@@ -273,4 +273,4 @@ This project is meant to provide one the last opportunities for each student to 
 
 - Professionalism: Students will develop their professional identity through self-reflection and working with others.
   + Prof.3: The student will demonstrate that they can work/collaborate effectively with others.
-  + Prof.5: The student will demonstrate that they can keep their (professional) commitments through actions such as attending class (on time), engaging with the class, and submitting work in a timely fashion.
+  + Prof.5: The student will demonstrate that they can keep their (professional) commitments through actions such as attending class (on time), engaging with the class, and submitting work in a timely fashion. 
