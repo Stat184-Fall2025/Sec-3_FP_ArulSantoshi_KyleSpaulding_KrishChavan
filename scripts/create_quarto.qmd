@@ -85,3 +85,4 @@ source("09_final_visualizations.R")
 
 While GDP is an important predictor of Olympic success, it does not fully explain Olympic performance. Other factors such as sports infrastructure, cultural emphasis on athletics, and targeted investment strategies play major roles in shaping national outcomes at the Olympics.
 
+---
