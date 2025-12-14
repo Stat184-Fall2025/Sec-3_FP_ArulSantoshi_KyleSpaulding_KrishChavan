@@ -64,4 +64,11 @@ source("07_regression_analysis.R")
 ## Efficiency Analysis
 
 # Script 08: Efficiency metrics
-source("scripts/08_efficiency_analysis.R")
+source("08_efficiency_analysis.R")
+
+
+
+## Final Visualizations
+
+# Script 09: Final visualizations
+source("09_final_visualizations.R")
