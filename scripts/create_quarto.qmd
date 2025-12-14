@@ -33,3 +33,10 @@ source("02_clean_olympics_medals_summer_data.R")
 
 # Script 03: Clean GDP data
 source("03_clean_gdp_data.R")
+
+
+## Data Merging
+
+# Script 04: Merge GDP and Olympics data
+source("04_merge_gdp_olympics.R")
+
