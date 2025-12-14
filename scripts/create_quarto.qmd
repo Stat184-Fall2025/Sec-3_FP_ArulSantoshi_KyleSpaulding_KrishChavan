@@ -72,3 +72,16 @@ source("08_efficiency_analysis.R")
 
 # Script 09: Final visualizations
 source("09_final_visualizations.R")
+
+
+## Key Findings
+
+# GDP is positively correlated with total medal counts, though with diminishing returns.
+# Several countries outperform GDP-based expectations, indicating higher efficiency.
+# Regression residuals highlight nations that consistently over- or under-perform relative to economic size.
+
+
+## Conclusion
+
+While GDP is an important predictor of Olympic success, it does not fully explain Olympic performance. Other factors such as sports infrastructure, cultural emphasis on athletics, and targeted investment strategies play major roles in shaping national outcomes at the Olympics.
+
