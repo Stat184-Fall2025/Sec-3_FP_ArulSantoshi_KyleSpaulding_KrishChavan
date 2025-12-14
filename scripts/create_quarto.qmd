@@ -1,0 +1,35 @@
+---
+title: "Olympic Performance and GDP Analysis"
+author: "Arul Santoshi, Kyle Spaulding, Krish Chavan"
+format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Introduction
+
+This report explores the relationship between national economic output (GDP) and Olympic performance in the Summer Olympics. Using cleaned and merged datasets, we analyze medal counts, efficiency metrics, and regression relationships to better understand how economic resources relate to athletic success.
+
+
+## Setup
+
+# Load required libraries
+library(tidyverse)
+library(janitor)
+library(broom)
+
+
+## Data Collection
+
+# Script 01: Scrape / load Summer Olympics data
+source("01_scrape_summer_olympics_data.R")
+
+## Data Cleaning
+
+# Script 02: Clean Olympic medals data
+source("scripts/02_clean_olympics_medals_summer_data.R")
+
+# Script 03: Clean GDP data
+source("scripts/03_clean_gdp_data.R")
