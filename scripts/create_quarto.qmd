@@ -40,3 +40,24 @@ source("03_clean_gdp_data.R")
 # Script 04: Merge GDP and Olympics data
 source("04_merge_gdp_olympics.R")
 
+
+## Standardization
+
+# Script 05: Standardize medal counts
+source("05_standardize_olympics_data.R")
+
+
+
+## Exploratory Data Analysis
+
+# Script 06: Exploratory analysis
+source("06_exploratory_analysis.R")
+
+
+## Regression Analysis
+
+# Script 07: Regression analysis
+source("07_regression_analysis.R")
+
+
+
