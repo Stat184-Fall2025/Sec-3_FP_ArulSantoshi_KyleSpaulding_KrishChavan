@@ -1,7 +1,7 @@
 ---
 title: "Olympic Performance and GDP Analysis"
 author: "Arul Santoshi, Kyle Spaulding, Krish Chavan"
-format: html
+format: pdf
 execute:
   echo: true
   warning: false
@@ -16,62 +16,147 @@ This report explores the relationship between national economic output (GDP) and
 ## Setup
 
 # Load required libraries
+```{r}
 library(tidyverse)
 library(janitor)
 library(broom)
+library(countrycode)
+```
+
 
 
 ## Data Collection
 
 # Script 01: Scrape / load Summer Olympics data
-source("01_scrape_summer_olympics_data.R")
+
 
 ## Data Cleaning
 
 # Script 02: Clean Olympic medals data
+```{r}
 source("02_clean_olympics_medals_summer_data.R")
+```
+
 
 # Script 03: Clean GDP data
+```{r}
 source("03_clean_gdp_data.R")
+```
+
 
 
 ## Data Merging
 
 # Script 04: Merge GDP and Olympics data
+```{r}
 source("04_merge_gdp_olympics.R")
+```
+
 
 
 ## Standardization
 
 # Script 05: Standardize medal counts
+```{r}
 source("05_standardize_olympics_data.R")
+```
+
 
 
 
 ## Exploratory Data Analysis
 
 # Script 06: Exploratory analysis
+```{r}
 source("06_exploratory_analysis.R")
+```
+
 
 
 ## Regression Analysis
 
 # Script 07: Regression analysis
+```{r}
 source("07_regression_analysis.R")
+```
+
 
 
 
 ## Efficiency Analysis
 
 # Script 08: Efficiency metrics
+```{r}
 source("08_efficiency_analysis.R")
+```
+
 
 
 
 ## Final Visualizations
 
 # Script 09: Final visualizations
-source("09_final_visualizations.R")
+
+## Final Publication-Quality Visualizations
+
+This section presents the final, publication-quality visualizations generated for this project.  
+All figures were created using consistent themes, color palettes, and scales to support clear interpretation.
+
+---
+
+### Figure 1: GDP vs Olympic Medals (Main Relationship)
+
+![GDP vs Olympic Medals Relationship](01_gdp_medals_relationship.png)
+
+**Interpretation:**  
+Countries with higher GDPs tend to win more Olympic medals. The relationship is strong and statistically significant, with GDP explaining a substantial portion of medal count variation.
+
+---
+
+### Figure 2: Most Efficient Olympic Performers
+
+![Most Efficient Countries](02_efficiency_champions.png)
+
+**Interpretation:**  
+Several smaller economies outperform wealthier nations when medals are normalized by GDP. Hungary stands out as the most efficient Olympic performer.
+
+---
+
+### Figure 3: The Efficiency Paradox
+
+![Efficiency Paradox](03_efficiency_paradox.png)
+
+**Interpretation:**  
+There is a negative relationship between GDP size and medal efficiency, indicating that larger economies are not necessarily more efficient in converting economic power into medals.
+
+---
+
+### Figure 4: Olympic Medal Trends Over Time
+
+![Medal Trends Over Time](04_medal_trends_over_time.png)
+
+**Interpretation:**  
+The United States consistently dominates total medal counts, while China shows a strong upward trend, reflecting increased global competition over time.
+
+---
+
+### Figure 5: Over- and Under-Performers Relative to GDP
+
+![Over and Under Performers](05_over_under_performers.png)
+
+**Interpretation:**  
+Some countries consistently win more medals than their GDP predicts, while others underperform relative to their economic strength.
+
+---
+
+### Figure 6: GDP–Medal Correlation Over Time
+
+![Correlation Over Time](06_correlation_over_time.png)
+
+**Interpretation:**  
+The correlation between GDP and medal count has strengthened over time, with notable deviations such as the 1980 Moscow Olympic boycott.
+
+
 
 
 ## Key Findings
@@ -85,4 +170,3 @@ source("09_final_visualizations.R")
 
 While GDP is an important predictor of Olympic success, it does not fully explain Olympic performance. Other factors such as sports infrastructure, cultural emphasis on athletics, and targeted investment strategies play major roles in shaping national outcomes at the Olympics.
 
----
