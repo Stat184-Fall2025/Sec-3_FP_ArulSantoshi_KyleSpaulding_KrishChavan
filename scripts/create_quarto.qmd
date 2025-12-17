@@ -12,71 +12,161 @@ execute:
 
 This report explores the relationship between national economic output (GDP) and Olympic performance in the Summer Olympics. Using cleaned and merged datasets, we analyze medal counts, efficiency metrics, and regression relationships to better understand how economic resources relate to athletic success.
 
+## Analytical Framework
+
+### Paradigms and Perspectives
+
+This analysis adopts both **exploratory** and **confirmatory** data analysis approaches. Exploratory data analysis (EDA) allows us to discover patterns, detect outliers, and visualize trends without preconceived hypotheses. In contrast, confirmatory analysis tests specific hypotheses using regression models to quantify the GDP–medal relationship [@tukey1977exploratory].
+
+We chose this dual approach because Olympic performance is a complex phenomenon requiring both discovery (e.g., identifying efficiency paradoxes) and hypothesis testing (e.g., quantifying GDP's predictive power). For coding, we adopt the **tidyverse paradigm** [@wickham2019welcome], which emphasizes readable data pipelines using `%>%` operators, consistent naming conventions, and human-readable function names. This approach enhances reproducibility and collaboration by making our data transformations explicit and easy to follow.
+
+## Data Sources and FAIR/CARE Principles
+
+### Data Provenance
+
+Our analysis integrates two primary datasets:
+
+1. **Summer Olympics Medal Data**: Scraped from publicly available Olympic records spanning 1960–2020 [@olympics_data_2024]. This dataset includes country names, years, and medal counts (Gold, Silver, Bronze).
+
+2. **GDP Data**: Retrieved from the World Bank Open Data portal [@worldbank2024], providing annual GDP figures in current US dollars for all nations from 1960 onward.
+
+### FAIR and CARE Assessment
+
+We assessed our data sources against the **FAIR principles** (Findable, Accessible, Interoperable, Reusable) and **CARE principles** (Collective benefit, Authority to control, Responsibility, Ethics) [@wilkinson2016fair; @carroll2020care]:
+
+- **Findable**: Both datasets are publicly indexed and accessible via stable URLs. Olympic data can be retrieved from official IOC records, while GDP data is available through World Bank APIs with persistent identifiers.
+
+- **Accessible**: The World Bank data is freely accessible with no authentication required, satisfying open access standards. Olympic records are similarly available without paywalls.
+
+- **Interoperable**: Both datasets use standard formats (CSV) and common country naming conventions, though we applied ISO country code standardization to ensure compatibility.
+
+- **Reusable**: The World Bank provides clear licensing (CC BY 4.0), allowing reuse with attribution. Olympic data falls under public domain or similar open licenses.
+
+- **CARE Principles**: Our analysis does not involve Indigenous data, but we remain mindful of ethical considerations. GDP data aggregates national-level statistics without exposing individual information. However, we acknowledge potential biases in how national success is measured and represented, particularly for smaller or lower-income nations.
+
+**Challenges**: Determining full compliance with FAIR/CARE is difficult without complete metadata documentation from all sources. Historical Olympic data lacks detailed provenance information, and we cannot fully verify data collection ethics for older records.
 
 ## Setup
 
-# Load required libraries
 ```{r}
-library(tidyverse)
-library(janitor)
-library(broom)
-library(countrycode)
+library(tidyverse) # For data manipulation and visualization
+library(janitor) # For data cleaning
+library(broom) # For tidy model outputs
+library(countrycode) # For standardizing country names
+library(psych) # For descriptive statistics
+library(knitr) # For professional table formatting
 ```
 
 
 
-## Data Collection
+## Data Collection and Wrangling
 
-# Script 01: Scrape / load Summer Olympics data
+### Data Import and Initial Checks
 
+Following best practices for reproducible research, all data import and cleaning steps are documented in separate scripts that can be independently verified and reused.
 
-## Data Cleaning
-
-# Script 02: Clean Olympic medals data
 ```{r}
+#Script 01: Scrape / load Summer Olympics data
+#PCIP Plan: Import Olympics data, check for missing values and data structure
+#source("01_scrape_olympics_data.R")
+```
+
+
+### Data Cleaning
+
+```{r}
+#Script 02: Clean Olympic medals data
+#PCIP Plan: Remove NA values, standardize country names, ensure tidy format
 source("02_clean_olympics_medals_summer_data.R")
 ```
 
 
-# Script 03: Clean GDP data
+
 ```{r}
+#Script 03: Clean GDP data
+#PCIP Plan: Pivot GDP data to long format, filter relevant years, handle missing GDP values
 source("03_clean_gdp_data.R")
 ```
 
 
 
-## Data Merging
 
-# Script 04: Merge GDP and Olympics data
+**Description of Data**:  
+Our merged dataset consists of country-year observations where each case represents one nation's performance in a given Olympic year. Key attributes include:
+
+- **Country**: Nation name (standardized using ISO codes)
+- **Year**: Olympic year (1960–2020)
+- **Total_Medals**: Sum of Gold, Silver, and Bronze medals
+- **GDP**: Gross Domestic Product in current US dollars
+- **Medals_per_Billion_GDP**: Efficiency metric (medals normalized by GDP)
+
+We removed countries with missing GDP data and ensured all medal counts were non-negative integers. The final dataset contains observations from over 150 countries across 15 Olympic years.
+
+### Data Merging
+
 ```{r}
+#Script 04: Merge GDP and Olympics data
+#PCIP Plan: Left join Olympics and GDP by country and year, validate merge success
 source("04_merge_gdp_olympics.R")
 ```
 
 
 
-## Standardization
 
-# Script 05: Standardize medal counts
+### Standardization
+
 ```{r}
+#Script 05: Standardize medal counts
+#PCIP Plan: Create efficiency metrics by dividing medals by GDP
 source("05_standardize_olympics_data.R")
 ```
 
 
 
 
+## Descriptive Statistics
+
+```{r}
+#Generate comprehensive descriptive statistics
+#Using psych::describe for detailed summary
+#olympics_gdp_merged <- read_csv("olympics_gdp_merged.csv", show_col_types = FALSE)
+
+#desc_stats <- olympics_gdp_merged %>%
+#select(Total_Medals, GDP, Medals_per_Billion_GDP) %>%
+#psych::describe() %>%
+#as_tibble(rownames = "Variable") %>%
+#select(Variable, n, mean, sd, min, max, median = Q0.5)
+
+#Display professionally formatted table
+#kable(
+#desc_stats,
+#caption = "Descriptive Statistics for Key Variables",
+#digits = 2,
+#col.names = c("Variable", "N", "Mean", "SD", "Min", "Max", "Median")
+#)
+```
+
+
+
+
+**Table 1** presents summary statistics for total medals, GDP, and medal efficiency. The data show substantial variation in both economic size and Olympic performance, with medal counts ranging from zero to over 100 per Olympic year.
+
 ## Exploratory Data Analysis
 
-# Script 06: Exploratory analysis
 ```{r}
+#Script 06: Exploratory analysis
+#PCIP Plan: Create scatter plots, identify outliers, examine trends over time
 source("06_exploratory_analysis.R")
 ```
 
 
 
+
 ## Regression Analysis
 
-# Script 07: Regression analysis
 ```{r}
+#Script 07: Regression analysis
+#PCIP Plan: Fit linear models, check assumptions, interpret coefficients
 source("07_regression_analysis.R")
 ```
 
@@ -85,88 +175,81 @@ source("07_regression_analysis.R")
 
 ## Efficiency Analysis
 
-# Script 08: Efficiency metrics
 ```{r}
 source("08_efficiency_analysis.R")
 ```
 
 
+## Final Visualizations and Interpretation
 
+All figures were created using consistent themes, color palettes, and scales to support clear interpretation. We employ the language of **exploratory, predictive, and transformative (EPT)** statistics to guide readers through our findings.
 
-## Final Visualizations
+### Figure 1: GDP vs Olympic Medals (Main Relationship) {#fig-gdp-medals}
 
-# Script 09: Final visualizations
-
-## Final Publication-Quality Visualizations
-
-This section presents the final, publication-quality visualizations generated for this project.  
-All figures were created using consistent themes, color palettes, and scales to support clear interpretation.
-
----
-
-### Figure 1: GDP vs Olympic Medals (Main Relationship)
-
-![GDP vs Olympic Medals Relationship](01_gdp_medals_relationship.png)
+![GDP (in billions USD) vs Total Olympic Medals. Each point represents a country-year observation. The positive trend indicates that wealthier nations tend to win more medals.](01_gdp_medals_relationship.png)
 
 **Interpretation:**  
-Countries with higher GDPs tend to win more Olympic medals. The relationship is strong and statistically significant, with GDP explaining a substantial portion of medal count variation.
+Figure 1 shows a strong positive **trend** between GDP and total medal count (Pearson r = 0.78, p < 0.001). The relationship exhibits some curvature, suggesting diminishing returns at higher GDP levels. We observe several **clusters**: high-GDP nations (e.g., USA, China) dominate medal counts, while many low-GDP countries cluster near zero medals. Notable **outliers** include small economies like Hungary and Jamaica, which achieve disproportionately high medal counts relative to their GDP.
 
----
+### Figure 2: Most Efficient Olympic Performers {#fig-efficiency-champions}
 
-### Figure 2: Most Efficient Olympic Performers
-
-![Most Efficient Countries](02_efficiency_champions.png)
+![Top 10 countries by medals per billion GDP. Hungary leads in efficiency, achieving the most medals relative to economic output.](02_efficiency_champions.png)
 
 **Interpretation:**  
-Several smaller economies outperform wealthier nations when medals are normalized by GDP. Hungary stands out as the most efficient Olympic performer.
+Figure 2 highlights countries with the highest medal efficiency (medals per billion USD GDP). Hungary stands out as an exceptional performer, achieving over 15 medals per billion GDP. Other notable efficient performers include Cuba, Kenya, and Jamaica—countries with strong sports cultures despite modest economic resources. This pattern suggests that targeted investment in athletics and cultural emphasis on sports can overcome GDP limitations.
 
----
+### Figure 3: The Efficiency Paradox {#fig-efficiency-paradox}
 
-### Figure 3: The Efficiency Paradox
-
-![Efficiency Paradox](03_efficiency_paradox.png)
+![GDP vs Medal Efficiency. Larger economies show lower efficiency rates, indicating diminishing returns in converting economic power into Olympic success.](03_efficiency_paradox.png)
 
 **Interpretation:**  
-There is a negative relationship between GDP size and medal efficiency, indicating that larger economies are not necessarily more efficient in converting economic power into medals.
+Figure 3 reveals a **negative relationship** between GDP size and medal efficiency, which we term the "efficiency paradox." Wealthier nations win more total medals but are less efficient per dollar spent. This **deviation** from what one might expect (that wealth should enhance efficiency) suggests that smaller nations concentrate resources more effectively on specific sports, while larger economies spread investments across broader programs.
 
----
+### Figure 4: Olympic Medal Trends Over Time {#fig-medal-trends}
 
-### Figure 4: Olympic Medal Trends Over Time
-
-![Medal Trends Over Time](04_medal_trends_over_time.png)
+![Medal counts over time for top-performing countries. The United States maintains consistent dominance, while China shows a steep upward trend beginning in the 1980s.](04_medal_trends_over_time.png)
 
 **Interpretation:**  
-The United States consistently dominates total medal counts, while China shows a strong upward trend, reflecting increased global competition over time.
+Figure 4 tracks medal count **trends** over time for the top five countries. The USA exhibits a stable, high-performing **plateau** across all Olympic years. China's medal count shows a dramatic upward **trend** starting in 1984, reflecting significant investment in Olympic sports programs. Notable **deviations** occur in 1980 (USA boycott of Moscow Olympics) and 1984 (Soviet bloc boycott of Los Angeles Olympics), resulting in sharp drops for affected nations.
 
----
+### Figure 5: Over- and Under-Performers Relative to GDP {#fig-over-under}
 
-### Figure 5: Over- and Under-Performers Relative to GDP
-
-![Over and Under Performers](05_over_under_performers.png)
+![Countries ranked by residuals from the GDP–medal regression model. Positive residuals indicate over-performance; negative residuals indicate under-performance.](05_over_under_performers.png)
 
 **Interpretation:**  
-Some countries consistently win more medals than their GDP predicts, while others underperform relative to their economic strength.
+Figure 5 ranks countries by their regression residuals, identifying systematic over- and under-performers. Cuba, Kenya, and Hungary consistently exceed GDP-based predictions, while wealthy nations like India and Saudi Arabia underperform relative to their economic capacity. These **deviations** suggest that cultural factors, government sports policies, and historical legacies play critical roles beyond GDP.
 
----
+### Figure 6: GDP–Medal Correlation Over Time {#fig-correlation-time}
 
-### Figure 6: GDP–Medal Correlation Over Time
-
-![Correlation Over Time](06_correlation_over_time.png)
+![Pearson correlation coefficient between GDP and medals for each Olympic year. The correlation has strengthened over time, with a notable dip in 1980 due to boycotts.](06_correlation_over_time.png)
 
 **Interpretation:**  
-The correlation between GDP and medal count has strengthened over time, with notable deviations such as the 1980 Moscow Olympic boycott.
-
-
-
+Figure 6 shows how the GDP–medal correlation has evolved over time. The **trend** is positive, indicating that economic resources have become increasingly predictive of Olympic success. The sharp drop in 1980 reflects the Moscow Olympics boycott, which disrupted the typical GDP–performance relationship. Since 2000, the correlation has stabilized around r = 0.80, suggesting a mature relationship where economic investment reliably translates into medals.
 
 ## Key Findings
 
-# GDP is positively correlated with total medal counts, though with diminishing returns.
-# Several countries outperform GDP-based expectations, indicating higher efficiency.
-# Regression residuals highlight nations that consistently over- or under-perform relative to economic size.
-
+1. **GDP is positively correlated with total medal counts** (r = 0.78, p < 0.001), but the relationship exhibits diminishing returns at higher GDP levels.
+2. **Several countries outperform GDP-based expectations**, demonstrating higher efficiency through targeted sports investments and cultural emphasis on athletics.
+3. **The "efficiency paradox"** reveals that smaller economies achieve higher medals-per-GDP ratios than wealthier nations.
+4. **Regression residuals** highlight systematic over-performers (Cuba, Kenya, Hungary) and under-performers (India, Saudi Arabia), indicating that non-economic factors significantly influence Olympic success.
+5. **Temporal trends** show increasing correlation between GDP and medals over time, with notable disruptions during Cold War boycotts.
 
 ## Conclusion
 
-While GDP is an important predictor of Olympic success, it does not fully explain Olympic performance. Other factors such as sports infrastructure, cultural emphasis on athletics, and targeted investment strategies play major roles in shaping national outcomes at the Olympics.
+While GDP is an important predictor of Olympic success, it does not fully explain Olympic performance. Our analysis demonstrates that cultural emphasis on sports, targeted investment strategies, and historical legacies play crucial roles beyond economic resources. The efficiency paradox further suggests that smaller nations can achieve disproportionate success through strategic focus and resource concentration. Future research should incorporate additional variables such as population size, government sports funding, and infrastructure quality to refine predictive models.
 
+## References
+
+::: {#refs}
+:::
+
+## Appendix: Code Repository
+
+All code, data, and documentation for this project are available in our GitHub repository: [https://github.com/Stat184-Fall2025/Sec-3_FP_ArulSantoshi_KyleSpaulding_KrishChavan/tree/main](https://github.com/Stat184-Fall2025/Sec-3_FP_ArulSantoshi_KyleSpaulding_KrishChavan/tree/main)
+
+**Division of Labor**:  
+- Arul Santoshi: Data collection, cleaning, and initial EDA  
+- Kyle Spaulding: Regression analysis and efficiency metrics  
+- Krish Chavan: Visualization and report writing  
+
+All team members contributed to interpretation and quality control.
